@@ -25,7 +25,7 @@ namespace ClassicAssist.Data.Filters
     [FilterOptions( Name = " -  Rat Sounds", DefaultEnabled = true )]
     public class AudioFilterRatSounds : DynamicFilterEntry
     {
-        private static readonly int[] _audioPackets = { 0x188, 0x189, 0x18A, 0x18B, 0x18C }; // qk
+        private static readonly int[] _audioPackets = { 0x188, 0x189, 0x18A, 0x18B, 0x18C, 0xCD }; // qk
         private static bool _isEnabled;
 
         protected override void OnChanged( bool enabled )
