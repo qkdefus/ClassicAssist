@@ -9,15 +9,11 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:misc1="clr-namespace:ClassicAssist.UI.Misc"
     xmlns:data="clr-namespace:ClassicAssist.Data"
+    xmlns:ValueConverters="clr-namespace:ClassicAssist.UI.Misc.ValueConverters"
     x:Name="userControl"
     x:Class="ClassicAssist.UI.Views.GeneralControl"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="500">
-    <d:DesignerProperties.DesignStyle>
-        <Style TargetType="UserControl">
-            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-        </Style>
-    </d:DesignerProperties.DesignStyle>
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,6 +21,10 @@
                 <ResourceDictionary Source="../../Resources/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <ValueConverters:ValueConverterGroup x:Key="InvertAndVisibilitate">
+                <ValueConverters:InverseBooleanConverter />
+                <BooleanToVisibilityConverter />
+            </ValueConverters:ValueConverterGroup>
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>
@@ -154,12 +154,12 @@
             </TabControl.Resources>
 
 
-            <TabItem Name="Tab1" Header="Filter" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" OpacityMask="{DynamicResource BackgroundColor6Brush}" Foreground="#FFCCCCCC" Margin="0,0,-35,0" UseLayoutRounding="False" RenderTransformOrigin="1,0.5">
+            <TabItem x:Name="Tab1" Header="Filter" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" OpacityMask="{DynamicResource BackgroundColor6Brush}" Foreground="#FFCCCCCC" Margin="0,0,-35,0" UseLayoutRounding="False" RenderTransformOrigin="1,0.5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100*" MinWidth="99"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox x:Name="listBox" ItemsSource="{Binding Filters}" Height="Auto" Width="Auto">
+                    <ListBox x:Name="listBox" ItemsSource="{Binding Filters}" Height="Auto" Width="Auto" MinWidth="99">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -177,16 +177,34 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                
+
             </TabItem>
-            <TabItem Name="Tab2" Header="Sounds" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" Foreground="#FFCCCCCC" Margin="39,0,-39,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84">
+            <TabItem x:Name="Tab2" Header="Sounds" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" Foreground="#FFCCCCCC" Margin="39,0,-39,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84">
                 <Grid Margin="0,0,0,-4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100*" MinWidth="99"/>
                     </Grid.ColumnDefinitions>
-                    
+                    <TreeView x:Name="treeView" ItemsSource="{Binding Items}" Height="Auto" Width="Auto" MinWidth="99" Margin="0,0,0,4">
+                        <i:Interaction.Behaviors>
+                            <misc1:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                        </i:Interaction.Behaviors>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <ContentControl>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="0,0,5,0"
+                                    Visibility="{Binding IsCategory, Converter={StaticResource InvertAndVisibilitate}}" />
+                                        <TextBlock Text="{Binding}" Foreground="{DynamicResource ThemeForegroundBrush}"
+                                    ToolTip="{Binding Tooltip}" />
+                                    </StackPanel>
+                                </ContentControl>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
                 </Grid>
             </TabItem>
+
+            
 
         </TabControl>
     </Grid>
