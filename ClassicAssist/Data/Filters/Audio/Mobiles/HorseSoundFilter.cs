@@ -22,10 +22,10 @@ using ClassicAssist.UO.Network.PacketFilter;
 
 namespace ClassicAssist.Data.Filters
 {
-    [FilterOptions( Name = "Bards Music", DefaultEnabled = true )]
-    public class BardsMusicFilter : DynamicFilterEntry
+    [FilterOptions( Name = " -  Horse Sounds", DefaultEnabled = true )]
+    public class AudioFilterHorseSounds : DynamicFilterEntry
     {
-        private static readonly int[] _bardsMusic = { 0x38, 0x39, 0x43, 0x44, 0x45, 0x46, 0x4C, 0x4D, 0x52, 0x53 };
+        private static readonly int[] _audioPackets = { 0xA8, 0xAC, 0xA4, 0xAA, 0xAB, 0xA9 }; // qk -> 0xA4, 0xAA, 0xAB, 0xA9
         private static bool _isEnabled;
 
         protected override void OnChanged( bool enabled )
@@ -47,7 +47,7 @@ namespace ClassicAssist.Data.Filters
 
             int soundId = ( packet[2] << 8 ) | packet[3];
 
-            return _bardsMusic.Contains( soundId );
+            return _audioPackets.Contains( soundId );
         }
     }
 }

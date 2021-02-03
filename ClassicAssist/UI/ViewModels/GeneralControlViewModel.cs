@@ -36,8 +36,56 @@ namespace ClassicAssist.UI.ViewModels
         {
             Type[] filterTypes =
             {
-                typeof( WeatherFilter ), typeof( SeasonFilter ), typeof( LightLevelFilter ),
-                typeof( RepeatedMessagesFilter ), typeof( ClilocFilter ), typeof( BardsMusicFilter )
+                typeof( WeatherFilter ), 
+                typeof( SeasonFilter ), 
+                typeof( LightLevelFilter ),
+                typeof( RepeatedMessagesFilter ), 
+                typeof( ClilocFilter ),
+                
+
+                typeof( AudioFilterWeaponSounds ),
+                typeof( AudioFilterPlayerHitSounds ),
+                typeof( AudioFilterEmoteMaleSounds ),
+                typeof( AudioFilterEmoteFemaleSounds ),
+                typeof( AudioFilterNpcVendorSounds ),
+                typeof( AudioFilterSpellFizzleSounds ),
+                typeof( AudioFilterSpiritSpeakSounds ),
+                typeof( AudioFilterInscribingSounds ),
+                typeof( AudioFilterMeditationSounds ),
+                typeof( AudioFilterAlchemySounds ),
+                typeof( AudioFilterBlacksmithSounds ),
+                typeof( AudioFilterMiningSounds ),
+                typeof( AudioFilterBardsMusic ),
+                typeof( AudioFilterHorseSounds ),
+                typeof( AudioFilterLlamaSounds ),
+                typeof( AudioFilterDogSounds ),
+                typeof( AudioFilterCatSounds ),
+                typeof( AudioFilterDeerSounds ),
+                typeof( AudioFilterPigSounds ),
+                typeof( AudioFilterSheepSounds ),
+                typeof( AudioFilterGoatSounds ),
+                typeof( AudioFilterRatSounds ),
+                typeof( AudioFilterBirdSounds ),
+                typeof( AudioFilterEagleSounds ),
+                typeof( AudioFilterChickenSounds ),
+                typeof( AudioFilterBullSounds ),
+                typeof( AudioFilterWolfSounds ),
+                typeof( AudioFilterBearSounds ),
+                typeof( AudioFilterCougarSounds ),
+                typeof( AudioFilterMongbatSounds ),
+                typeof( AudioFilterTitanCyclopsSounds ),
+                typeof( AudioFilterDragonSounds ),
+                typeof( AudioFilterItemPickupSounds ),
+                typeof( AudioFilterItemDropSounds ),
+
+                typeof( AudioFilterBackpackSounds ),
+                typeof( AudioFilterFootStepSounds ),
+                typeof( AudioFilterDoorSounds ),
+                typeof( AudioFilterTeleportTileSounds ),
+                typeof( AudioFilterMoonGateSounds ),
+                typeof( AudioFilterRecallSounds ),
+                typeof( AudioFilterTeleportSounds ),
+
             };
 
             foreach ( Type type in filterTypes )
