@@ -72,13 +72,14 @@
                 </Grid>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="1" Margin="5,15,0,0">
+        <Grid Grid.Column="1" Margin="10,16,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
+            <StackPanel Grid.Row="0" Grid.RowSpan="2" Margin="7,0,0,0">
                 <CheckBox Content="{x:Static r:Strings.Always_On_Top}" IsChecked="{Binding Options.AlwaysOnTop}" />
                 <StackPanel Orientation="Horizontal">
                     <StackPanel.Resources>
@@ -98,7 +99,7 @@
                     </CheckBox>
                 </StackPanel>
             </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <GroupBox Header="{x:Static r:Strings.Saved_Passwords_}" Margin="5" Padding="5">
                     <StackPanel>
                         <Grid>
@@ -120,7 +121,7 @@
                     </StackPanel>
                 </GroupBox>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <GroupBox Header="{x:Static r:Strings.Profiles}" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -161,5 +162,6 @@
                 </GroupBox>
             </Grid>
         </Grid>
+        <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1" Margin="0,5"/>
     </Grid>
 </UserControl>
