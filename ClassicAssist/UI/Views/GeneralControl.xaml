@@ -35,43 +35,6 @@
             <ColumnDefinition Width="175" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Margin="5" BorderThickness="1" Header="{x:Static r:Strings.Filters}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <ListBox x:Name="listBox" ItemsSource="{Binding Filters}" Grid.Row="0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Enabled}" />
-                                <TextBlock Text="{Binding Name}" Margin="5,0,5,0" />
-                                <Button Background="Transparent" BorderThickness="0"
-                                        ToolTip="{x:Static r:Strings.Options}"
-                                        Visibility="{Binding IsConfigurable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        Command="{Binding DataContext.ConfigureFilterCommand, ElementName=userControl}"
-                                        CommandParameter="{Binding Mode=OneWay}" Margin="0" Padding="0">
-                                    <Button.Content>
-                                        <Image Source="{StaticResource configureIcon}" Height="16" Margin="0" />
-                                    </Button.Content>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{x:Static r:Strings.Light}" Grid.Column="0" />
-                    <Slider Grid.Column="1" Maximum="31"
-                            Value="{Binding Options.LightLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            IsDirectionReversed="True" Minimum="0" Height="20" VerticalAlignment="Center" />
-                </Grid>
-            </Grid>
-        </GroupBox>
         <Grid Grid.Column="1" Margin="10,16,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="26*" />
@@ -91,7 +54,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{x:Static r:Strings.Action_Delay_}" Margin="0" />
                                     <TextBox Width="40" Margin="10,0,10,0"
-                                             Text="{Binding Path=Data.Options.ActionDelayMS, Source={StaticResource proxy}}" />
+                                             Text="{Binding Data.Options.ActionDelayMS, Source={StaticResource proxy}}" />
                                     <Label Content="ms" Margin="0" Padding="0" />
                                 </StackPanel>
                             </ItemContainerTemplate>
@@ -162,6 +125,49 @@
                 </GroupBox>
             </Grid>
         </Grid>
-        <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1" Margin="0,5"/>
+        <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1" Margin="4,5,0,5"/>
+        <TabControl Margin="4,10,1,5" BorderBrush="#FF444444" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Border x:Name="Border" BorderThickness="0,0,0,0" BorderBrush="Gainsboro" CornerRadius="0,0,0,0" Margin="1,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#FF474747" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#FF616161" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Filter" Background="{DynamicResource ButtonBorderBrush}" OpacityMask="{DynamicResource BackgroundColor6Brush}" Foreground="#FFCCCCCC" Margin="0,0,-26,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sounds" Background="{DynamicResource ButtonBorderBrush}" Foreground="#FFCCCCCC" Margin="26,0,-26,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                <Grid Margin="0,0,0,-84">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="103*"/>
+                        <ColumnDefinition Width="65*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

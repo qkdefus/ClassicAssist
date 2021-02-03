@@ -11,5 +11,10 @@ namespace ClassicAssist.UI.Views
         {
             InitializeComponent();
         }
+
+        private void GridSplitter_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+
+        }
     }
 }
