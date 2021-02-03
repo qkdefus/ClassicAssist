@@ -15,6 +15,7 @@ using ClassicAssist.UI.Misc;
 using ClassicAssist.UI.Views;
 using ClassicAssist.UO;
 using Newtonsoft.Json.Linq;
+using ClassicAssist.Data.Filters.Audio;
 
 namespace ClassicAssist.UI.ViewModels
 {
@@ -94,6 +95,67 @@ namespace ClassicAssist.UI.ViewModels
                 Filters.Add( fe );
             }
 
+
+            Type[] audioTypes =
+           {
+                typeof( WeatherFilter ),
+                typeof( SeasonFilter ),
+                typeof( LightLevelFilter ),
+                typeof( RepeatedMessagesFilter ),
+                typeof( ClilocFilter ),
+
+
+                typeof( AudioFilterWeaponSounds ),
+                typeof( AudioFilterPlayerHitSounds ),
+                typeof( AudioFilterEmoteMaleSounds ),
+                typeof( AudioFilterEmoteFemaleSounds ),
+                typeof( AudioFilterNpcVendorSounds ),
+                typeof( AudioFilterSpellFizzleSounds ),
+                typeof( AudioFilterSpiritSpeakSounds ),
+                typeof( AudioFilterInscribingSounds ),
+                typeof( AudioFilterMeditationSounds ),
+                typeof( AudioFilterAlchemySounds ),
+                typeof( AudioFilterBlacksmithSounds ),
+                typeof( AudioFilterMiningSounds ),
+                typeof( AudioFilterBardsMusic ),
+                typeof( AudioFilterHorseSounds ),
+                typeof( AudioFilterLlamaSounds ),
+                typeof( AudioFilterDogSounds ),
+                typeof( AudioFilterCatSounds ),
+                typeof( AudioFilterDeerSounds ),
+                typeof( AudioFilterPigSounds ),
+                typeof( AudioFilterSheepSounds ),
+                typeof( AudioFilterGoatSounds ),
+                typeof( AudioFilterRatSounds ),
+                typeof( AudioFilterBirdSounds ),
+                typeof( AudioFilterEagleSounds ),
+                typeof( AudioFilterChickenSounds ),
+                typeof( AudioFilterBullSounds ),
+                typeof( AudioFilterWolfSounds ),
+                typeof( AudioFilterBearSounds ),
+                typeof( AudioFilterCougarSounds ),
+                typeof( AudioFilterMongbatSounds ),
+                typeof( AudioFilterTitanCyclopsSounds ),
+                typeof( AudioFilterDragonSounds ),
+                typeof( AudioFilterItemPickupSounds ),
+                typeof( AudioFilterItemDropSounds ),
+
+                typeof( AudioFilterBackpackSounds ),
+                typeof( AudioFilterFootStepSounds ),
+                typeof( AudioFilterDoorSounds ),
+                typeof( AudioFilterTeleportTileSounds ),
+                typeof( AudioFilterMoonGateSounds ),
+                typeof( AudioFilterRecallSounds ),
+                typeof( AudioFilterTeleportSounds ),
+
+            };
+
+            foreach (Type type in audioTypes)
+            {
+                AudioEntry fe = (AudioEntry)Activator.CreateInstance(type);
+                AudioFilters.Add(fe);
+            }
+
             RefreshProfiles();
 
             AssistantOptions.ProfileChangedEvent += OnProfileChangedEvent;
@@ -109,6 +171,7 @@ namespace ClassicAssist.UI.ViewModels
             _configureFilterCommand ?? ( _configureFilterCommand = new RelayCommand( ConfigureFilter ) );
 
         public ObservableCollectionEx<FilterEntry> Filters { get; set; } = new ObservableCollectionEx<FilterEntry>();
+        public ObservableCollectionEx<AudioEntry> AudioFilters { get; set; } = new ObservableCollectionEx<AudioEntry>();
 
         public bool IsLinkedProfile
         {
