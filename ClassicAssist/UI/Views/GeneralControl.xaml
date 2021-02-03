@@ -157,18 +157,37 @@
             <TabItem Name="Tab1" Header="Filter" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" OpacityMask="{DynamicResource BackgroundColor6Brush}" Foreground="#FFCCCCCC" Margin="0,0,-35,0" UseLayoutRounding="False" RenderTransformOrigin="1,0.5">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*" MinWidth="99"/>
                     </Grid.ColumnDefinitions>
+                    <ListBox x:Name="listBox" ItemsSource="{Binding Filters}" Height="Auto" Width="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding Enabled}" />
+                                    <TextBlock Text="{Binding Name}" Margin="5,0,5,0" />
+                                    <Button Background="Transparent" BorderThickness="0"
+                                ToolTip="{x:Static r:Strings.Options}"
+                                Visibility="{Binding IsConfigurable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Command="{Binding DataContext.ConfigureFilterCommand, ElementName=userControl}"
+                                CommandParameter="{Binding Mode=OneWay}" Margin="0" Padding="0">
+                                        <Image Source="{StaticResource configureIcon}" Height="16" Margin="0" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
+                
             </TabItem>
             <TabItem Name="Tab2" Header="Sounds" DockPanel.Dock="Left" Background="{DynamicResource ButtonBorderBrush}" Foreground="#FFCCCCCC" Margin="39,0,-39,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84">
                 <Grid Margin="0,0,0,-4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="37*"/>
-                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="100*" MinWidth="99"/>
                     </Grid.ColumnDefinitions>
+                    
                 </Grid>
             </TabItem>
+
         </TabControl>
     </Grid>
 </UserControl>
