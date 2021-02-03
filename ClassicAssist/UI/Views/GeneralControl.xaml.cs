@@ -17,4 +17,18 @@ namespace ClassicAssist.UI.Views
 
         }
     }
+
+    public class CustomTabControl : TabControl
+    {
+        protected override void OnRenderSizeChanged(System.Windows.SizeChangedInfo sizeInfo)
+        {
+            foreach (TabItem item in this.Items)
+            {
+                double newW = (this.ActualWidth / Items.Count) - 1;
+                if (newW < 0) newW = 0;
+
+                item.Width = newW;
+            }
+        }
+    }
 }
